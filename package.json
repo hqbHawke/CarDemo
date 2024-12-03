@@ -1,0 +1,26 @@
+{
+  "name": "showcar",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.9.0",
+    "gsap": "^3.12.5",
+    "mitt": "^3.0.1",
+    "three": "^0.171.0",
+    "vue": "^3.4.29",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "5.6.2",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.29"
+  }
+}
