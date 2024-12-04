@@ -1,19 +1,44 @@
 <template>
   <div class="home">
     <!-- <div class="canvas-container" ref="canvasDom"></div> -->
+    <div class="heardNav">
+        <div class="logo">
+
+          <span class="iconfont icon-fangxiangpan" style="font-size: 3rem;filter: drop-shadow(0 2px 2px);"></span>
+          <div class="nav"> 汽车展厅DEMO </div>
+        </div>
+        <div class="gongneng">
+            <span class="iconfont icon-folder-open-fill"></span>
+            <DocumentAdd  style="width:2em;height:2em;margin-top: 2rem;margin-right: 2em"/>
+            <span class="iconfont" style="width:1rem;font-size: 1.5rem;margin-right: 1em">|</span>
+            <UserFilled class="iconfont icon-user" style="width:1em;height:1em;margin-top: 2rem;margin-right: .2em"/>
+            <span class="iconfont" style="font-size: 1rem;width: auto ;">郝先生</span>
+
+        </div>
+    </div>
     <div class="cameraPositons">
       <div class="cameraPositons-item" v-for="(item, index) in cameraPositons" :key="index">
         <div class="cameraPositons-item-name" :class="activeCameraPos === index ? 'active' : ''"
           @click="setCameraPosition(item.valueL, index)">{{ item.name }}</div>
       </div>
     </div>
-    <div class="home-switch">
-        <div class="home-switch-btn" @click="changeQuanNeishi(controls)" title="切换视角" >
-          <View style="width: 2em; height: 2em;color:white" title="切换视角" />
-        </div>
-    </div>
-    <el-drawer v-model="drawer" title="I am the title" :with-header="false">
-      <span>Hi there!</span>
+    <el-radio-group v-model="shijiao" class="home-switch">
+        <el-radio-button value="1">车身</el-radio-button>
+        <el-radio-button value="2">内饰</el-radio-button>
+      </el-radio-group>
+    <el-drawer v-model="showModelList" title="车型列表" :show-close="true" @close="closeDrawer()">
+      <div class="modelDanTi">
+        <el-card style="max-width: 480px">
+          <img src="./../assets/image.png" alt="" srcset="" class="model-img">
+          <div class="model-text">
+            <div class="model-name">模型名称：宝马</div>
+            <div class="model-desc">模型描述:</div>
+          </div>
+          <template #footer>售价:29,000,000</template>
+        </el-card>
+        <div style="width: 100%;height: 3rem;display: flex;justify-content: center;align-items: center;margin-top: 4rem;">
+        更多车型尽情期待...</div>
+      </div>
     </el-drawer>
     <div class="home-content">
       <el-radio-group v-model="tabPosition" class="select-btn">
@@ -32,22 +57,58 @@
         </div>
       </div>
     </div>
+    <div class="home-rightC">
+      <div class="changeModel" v-for="(item,index) in typeCatch" @click="changeType(index)" :class="xuanzhongType===index?'activeType':''">
+        {{ item }}
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script setup>
 import * as THREE from "three";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref,watch } from "vue";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import { ElRadioButton, ElRadioGroup, ElDrawer } from 'element-plus'
-import { View } from '@element-plus/icons-vue'
+import { ElRadioButton, ElRadioGroup, ElDrawer,ElMessage } from 'element-plus'
+import { View,UserFilled,DocumentAdd } from '@element-plus/icons-vue'
 import gsap from 'gsap'
+const typeCatch = ref(['展示','方案','车型'])
+const xuanzhongType = ref(0)
 const cameraPositons = [{ name: '车身', valueL: { x: 2.93, y: 1.792, z: 1.586 } }, { name: '车头', valueL: { x: 0.132, y: 0.855, z: 3.33 } }, { name: '车轮', valueL: { x: 2.42, y: 0, z: -1.586 } }, { name: '车尾', valueL: { x: 0.034, y: 1.21, z: -3.97 } }, { name: '前脸', valueL: { x: 0, y: 2.5, z: 3.4 } }, { name: '后视镜', valueL: { x: 1.215, y: 1.221, z: -0.07 } }, { name: '后备箱', valueL: { x: 0.005, y: 1.65, z: -2.84 } }]
 const tabPosition = ref('1')
-const drawer = ref(false)
+const showModelList = ref(false)
+const shijiao = ref('1')
 let controls;
+const closeDrawer = () => {
+  showModelList.value = false;
+  xuanzhongType.value = 0
+
+}
+const changeType = (index) => {
+    xuanzhongType.value = index
+    switch (index) {
+      case 1:
+        ElMessage.info('暂未开发')
+        xuanzhongType.value = 0
+        break;
+      case 2:
+        showModelList.value = true
+        break;
+      default:
+        break;
+    }
+}
+watch(()=>shijiao.value,()=>{
+    if(shijiao.value == '1'){
+        resetControl(controls)
+    }else{
+        changeQuanNeishi(controls)
+    }
+    console.log('shijiao',shijiao.value);
+})
 // let canvasDom = ref(null);
 // 创建场景
 const scene = new THREE.Scene();
@@ -63,6 +124,7 @@ const activeCameraPos = ref(0);
 const activeMaterial = ref(0);
 camera.position.set(2.93, 1.792, 1.586);
 const setCameraPosition = (position, index) => {
+  if (shijiao.value != '1') return ElMessage.warning('请切换视角');
   const newPositions = new THREE.Vector3();
   const originalPosition = camera.position.clone();
   gsap.to(originalPosition, {
@@ -270,13 +332,124 @@ loader.load("./model/bmw01.glb", (gltf) => {
   scene.add(light9);
 });
 </script>
+<style scoped lang="less">
+.heardNav{
+      width: 100%;
+      height: 8%;
+      position: absolute;
+      top:0;
+      background-color: rgba(236, 236, 241, 0.279);
+      box-shadow: 0px 0px 3px 5px ;
+      z-index: 12;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
 
+      .logo{
+        height: 100%;   
+        // background-image: url("carLogo.png");
+        background-repeat: no-repeat;
+        z-index: 20;
+        background-size: 100% 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-left: 2rem;
+        .nav{
+        width: auto;
+        height: 100%;
+        font-size: 2rem;
+        line-height: 5rem;
+        font-weight: 900;
+        margin-left: 1.5rem;
+        
+      text-shadow: -3px 0px 2px ;
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.637);
+        //扩大字体间距
+        text-decoration: underline;
+        // 字体间距
+        letter-spacing: 0.5rem;
+        // 设置字体下划线样式
+        text-decoration-style: solid;
+
+        // 设置字体下划线颜色
+        text-decoration-color: rgb(19, 18, 18);
+        cursor: pointer;
+      }
+        .iconfont{
+          font-size: 3rem;
+          line-height: 3rem;
+          color: rgba(24, 4, 197, 0.945);
+          cursor: pointer;
+        }
+      }
+      
+      .gongneng{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        width: auto;
+        height: 10vh;
+        line-height: 10vh;
+        margin-right: 2rem;
+        .iconfont{
+          cursor: pointer;
+          height: 100%;
+          width: 2.5rem;
+          font-size:2rem;
+          
+        }
+
+      }
+    }
+</style>
 <style>
+.el-drawer{
+  width: 20%!important;
+  background-color: #e7e7e7!important;
+}
+</style>
+<style scoped>
+.home-rightC{
+  position: fixed;
+  top: 8%;
+  right: 0;
+  width: 4rem;
+  height: calc(100vh - 8%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #00000047;
+}
+.changeModel{
+  width: 100%;
+  height: 4rem;
+  cursor: pointer;
+  color:#000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 600;
+  background-color: #00000044;
+  border-bottom: #000000a2 solid 1px;
+}
+.changeModel:hover{
+  background-color: #af23238c;
+  color:#fff;
+}
+.activeType{
+  background-color: #af23238c;
+  color:#fff;
+}
 .cameraPositons {
   width: 6rem;
   position: fixed;
   left: 1rem;
-  top: 14%;
+  top: 17%;
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -357,15 +530,29 @@ loader.load("./model/bmw01.glb", (gltf) => {
 
 .home-switch {
   position: fixed;
-  top: 10%;
-  left: 3%;
-  width: 3rem;
-  height: 2rem;
-  display: flex;
+  bottom: 2%;
+  left: 10.5%;
+  height: 3rem;
+
 }
 .home-switch-btn{
-  width:2rem;
-  height:2rem;
-  border-radius: 2rem;
+  width:3rem;
+  height:3rem;
+  background-color: rgba(255, 255, 255, 0.856);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .modelDanTi{
+  width: 90%;
+  height: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+.model-img{
+  width: 100%;
+  height: 8rem;
+  margin-top: .5rem;
 }
 </style>
