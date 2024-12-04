@@ -270,13 +270,6 @@ renderer.setClearColor("#000");
 scene.background = new THREE.Color("#ccc");
 scene.environment = new THREE.Color("#ccc");
 render();
-
-// 添加网格地面
-const gridHelper = new THREE.GridHelper(10, 10);
-gridHelper.material.opacity = 0.2;
-gridHelper.material.transparent = true;
-scene.add(gridHelper);
-
 // 添加控制器
 controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
