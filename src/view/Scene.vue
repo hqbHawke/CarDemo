@@ -1,65 +1,26 @@
 <template>
-  <div class="cameraPositons-item-name1" @click="zhanshiNeishi()"> 车内 </div>
-  <div class="home" v-show="shijiao != '3'">
+  <div class="cameraPositons-item-name1" v-show="shijiao == '1'" @click="zhanshiNeishi()"><span
+      class="iconfont icon-a-ziyuan14" style="font-size: 1.3rem;"> </span></div>
+  <div class="cameraPositons-item-name1" v-show="shijiao == '2'" @click="zhanshiNeishi()"><span
+      class="iconfont icon-iconfontzhizuobiaozhun023150" style="font-size: 1.3rem;"> </span></div>
+  <div class="home" v-show="shijiao != '2'">
     <!-- <div class="canvas-container" ref="canvasDom"></div> -->
-    <div class="heardNav">
-      <div class="logo">
-
-        <span class="iconfont icon-fangxiangpan" style="font-size: 3rem;filter: drop-shadow(0 2px 2px);"></span>
-        <div class="nav"> 汽车展厅DEMO </div>
-      </div>
-      <div class="gongneng">
-        <span class="iconfont icon-folder-open-fill"></span>
-        <span title="保存方案" ></span>
-        <DocumentAdd style="width:2em;height:2em;margin-top: 2rem;margin-right: 2em;cursor: pointer;" />
-        <span class="iconfont" style="width:1rem;font-size: 1.5rem;margin-right: 1em">|</span>
-        <UserFilled class="iconfont icon-user" style="width:1em;height:1em;margin-top: 2rem;margin-right: .2em" />
-        <span class="iconfont" style="font-size: 1rem;width: auto ;">郝先生</span>
-
-      </div>
-    </div>
-    <div class="cameraPositons">
+    <!-- <div class="cameraPositons">
       <div class="cameraPositons-item" v-for="(item, index) in cameraPositons" :key="index">
         <div class="cameraPositons-item-name" :class="activeCameraPos === index ? 'active' : ''"
           @click="setCameraPosition(item.valueL, index)">{{ item.name }}</div>
       </div>
-    </div>
-    <el-radio-group v-model="shijiao" class="home-switch">
+    </div> -->
+    <!-- <el-radio-group v-model="shijiao" class="home-switch">
       <el-radio-button value="1">车身</el-radio-button>
       <el-radio-button value="2">内饰</el-radio-button>
-    </el-radio-group>
-    <el-drawer v-model="showModelList" :show-close="true" @close="closeDrawer()">
-      <template #header>
-        <div
-          style="display: flex;justify-content: center;align-items: center;font-size: 1.5rem;font-weight: 800;color: #000;">
-          车型列表</div>
-      </template>
-      <div class="modelDanTi">
-        <el-card style="max-width: 480px">
-          <img src="./../assets/image.png" alt="" srcset="" class="model-img">
-          <!-- <div class="model-text">
-            <div class="model-name">模型名称：宝马</div>
-            <div class="model-desc">模型描述:</div>
-          </div> -->
-          <template #footer>
-            <div style="display: flex;justify-content: space-between;align-items: center;font-size: large;color: #000;">
-              <div>车型：&nbsp;&nbsp;&nbsp;宝马</div><el-button style="width: 4rem;" type="primary">查看
-                <Search style="width: 1.5em;height: 1.5em" />
-              </el-button>
-            </div>
-          </template>
-        </el-card>
-        <div
-          style="width: 100%;height: 3rem;display: flex;justify-content: center;align-items: center;margin-top: 4rem;">
-          更多车型尽情期待...</div>
-      </div>
-    </el-drawer>
-    <div class="home-content">
+    </el-radio-group> -->
+    <!-- <div class="home-content">
       <el-radio-group v-model="tabPosition" class="select-btn">
         <el-radio-button value="1">车身颜色</el-radio-button>
         <el-radio-button value="2">贴膜材质</el-radio-button>
-      </el-radio-group>
-      <div class="select">
+      </el-radio-group> -->
+    <!-- <div class="select">
         <div class="select-item" v-show="tabPosition == 1" v-for="(item, index) in colors" :key="index"
           @click="selectColor(index)">
           <div class="select-item-color" :class="activeColor === index ? 'active' : ''"
@@ -70,15 +31,146 @@
           @click="selectMaterial(index)">
           <img class="select-item-color" :class="activeMaterial === index ? 'active' : ''" :src="item.img" alt="">
         </div>
-      </div>
-    </div>
-    <div class="home-rightC">
-      <div class="changeModel" v-for="(item, index) in typeCatch" @click="changeType(index)"
-        :class="xuanzhongType === index ? 'activeType' : ''">
-        {{ item }}
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
+    <div id="home-rightC" :class="rigthbActive?'home-rightC2':'home-rightC'">
+      <div class="zhanshi" style="width: 100%;height: 100%;" v-show="!rigthbActive">
 
+        <div class="qichemodel" v-show="xuanzhongType === 0">
+          <div class="modellist" style="width: 80%;">
+            <img src="/public/CarPng/qiche.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 80%;">
+            <img src="/public/CarPng/qiche.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 80%;">
+            <img src="/public/CarPng/qiche.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 80%;">
+            <img src="/public/CarPng/qiche.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+        </div>
+        <div class="qichemodel" v-show="xuanzhongType === 5" style="gap: 2rem;">
+          <div class="modellist" style="width: 75%;height: 6rem;">
+            <img src="/public/cahngjing/image.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 75%;height: 6rem;">
+            <img src="/public/cahngjing/image.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 75%;height: 6rem;">
+            <img src="/public/cahngjing/image.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+          <div class="modellist" style="width: 75%;height: 6rem;">
+            <img src="/public/cahngjing/image.png" alt="" srcset=""
+              style="width: 100%;height: 100%; background-color: transparent;">
+          </div>
+        </div>
+        <div class="qichemodel" v-show="xuanzhongType === 4">
+          <div class="select-item" v-show="tabPosition == 1" v-for="(item, index) in colors" :key="index"
+            @click="selectColor(index)">
+            <div class="waiceng" style="
+            width: 3.5rem;
+            height: 3.5rem;
+            /* border: 1px solid #ccc; */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;" :class="activeColor === index ? 'active' : ''">
+              <div class="select-item-color" :style="{ backgroundColor: item }"
+                :class="activeColor === index ? 'active1' : ''">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qichemodel" v-show="xuanzhongType === 2">
+          <div class="modelchelunlist" v-for="(item, index) in cheluntu" @click="setCheLunMaterial(index)">
+            <div class="waiceng" style="
+            width: 3.5rem;
+            height: 3.5rem;
+            /* border: 1px solid #ccc; */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;" :class="activechelun === index ? 'active' : ''">
+              <img :src="item.img" alt="" srcset="" style="width: 100%;height: 100%; background-color: transparent;">
+            </div>
+          </div>
+        </div>
+        <div class="qichemodel" v-show="xuanzhongType === 1">
+          <div class="modelchelunlist" v-for="(item, index) in materials" @click="selectMaterial(index)">
+            <div class="waiceng" style="
+            width: 3.5rem;
+            height: 3.5rem;
+            /* border: 1px solid #ccc; */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;" :class="activeMaterial === index ? 'active' : ''">
+              <img :src="item.img" alt="" srcset=""
+                style="width: 100%;height: 100%; background-color: transparent;border-radius: 50%;"
+                :class="activeMaterial === index ? 'active1' : ''">
+            </div>
+          </div>
+          <!-- <div class="select-item" v-show="tabPosition == 2" v-for="(item, index) in materials" :key="index"
+          @click="selectMaterial(index)">
+          <img class="select-item-color" :class="activeMaterial === index ? 'active' : ''" :src="item.img" alt="">
+        </div> -->
+        </div>
+        <div class="qichemodel" v-show="xuanzhongType === 3">
+          <div class="modelchelunlist" v-for="(item, index) in tianqilist" @click="selecttianqi(index)">
+            <div class="waiceng" style="
+            width: 3.5rem;
+            height: 3.5rem;
+            /* border: 1px solid #ccc; */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;" :class="activeTianqi === index ? 'active' : ''">
+              <span class="iconfont" :class="item.class" style="font-size: 2.4rem;"
+                :style="{ color: item.color }"></span>
+            </div>
+          </div>
+          <!-- <div class="select-item" v-show="tabPosition == 2" v-for="(item, index) in materials" :key="index"
+          @click="selectMaterial(index)">
+          <img class="select-item-color" :class="activeMaterial === index ? 'active' : ''" :src="item.img" alt="">
+        </div> -->
+        </div>
+      </div>
+      <div class="home-rightc1">
+        <div class="changeModel" style="position: absolute;top: 0;right: 0" v-show="rigthbActive" @click="rigthbActive=false"><ArrowRightBold style="width: 1.5em;height: 1.5em"/></div>
+        <div class="changeModel" v-for="(item, index) in typeCatch" @click="changeType(index)"
+          :class="xuanzhongType === index ? 'activeType' : ''">
+          <span class="iconfont" :class="item" style="font-size: 1.3rem;"></span>
+        </div>
+        <div @click="xuangou()"
+          style="position: fixed;bottom: 0;right: 0;height: 2rem;line-height: 2rem;width: 4rem;text-align: center;background-color: #434D5B;color: #D7D7D7;cursor: pointer;">
+          选购</div>
+      </div>
+
+      <div class="home-rightb" v-show="rigthbActive">
+        <div class="mainRightb" style="width: 100%;">
+
+        </div>
+        <div class="fotter"
+          style="width: 80%;height: 3rem;display: flex;justify-content: space-between;align-items: center;border-top: #CCCCAB solid 1px;">
+          <div class="fotter-left" style="width:30%;text-align: center;line-height: 2rem;">
+            299,000
+          </div>
+          <el-button type="default" style="width: 5rem;" @click="ElMessage.info('暂未开发')">保存配置</el-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -89,9 +181,29 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { ElRadioButton, ElRadioGroup, ElDrawer, ElMessage, ElButton } from 'element-plus'
-import { View, UserFilled, DocumentAdd, Search } from '@element-plus/icons-vue'
+import { View, UserFilled, DocumentAdd, Search,ArrowRightBold } from '@element-plus/icons-vue'
 import gsap from 'gsap'
-const typeCatch = ref(['展示', '方案', '车型', '场地'])
+const rigthbActive = ref(false)
+const xuangou = () =>{
+  //   const x = document.getElementById('home-rightC').style.width
+  // if(rigthbActive.value){
+  //   x = '24rem'
+  //   console.log(x);
+  // }else{
+  //   console.log(x);
+  //   x = '17rem'}
+  rigthbActive.value = !rigthbActive.value
+  console.log(rigthbActive.value);
+}
+let colors = ["red", "blue", "green", "gray", "orange", "purple"];
+const tianqilist = [{ class: 'icon-taiyang', color: '#F9C626' }, { class: 'icon-duoyun', color: '#7CDCFE' }, { class: 'icon-tianqiyutiandayu', color: '#fff' }]
+const activechelun = ref(0)
+const cheluntu = ref([{ img: '/public/CarPng/chelun.png', color: colors[0] }, { img: '/public/CarPng/chelun.png', color: colors[1] }, { img: '/public/CarPng/chelun.png', color: colors[2] }])
+const setCheLunMaterial = (index) => {
+  activechelun.value = index
+  wheelsMaterial.color.set(colors[index]);
+}
+const typeCatch = ref(['icon-liebiao', 'icon-zhuangxiu', 'icon-chelun', 'icon-yun-', 'icon-ziyuan', 'icon-lunbo-04'])
 const xuanzhongType = ref(0)
 const cameraPositons = [{ name: '车身', valueL: { x: 2.699, y: 1.569, z: 0.326 } }, { name: '车头', valueL: { x: 0.118, y: 1.720, z: 2.97 } }, { name: '车轮', valueL: { x: 2.1729, y: 1.50, z: -1.42 } }, { name: '车尾', valueL: { x: 0.037, y: 2.0752, z: -3.59 } }, { name: '前脸', valueL: { x: 0, y: 2.5, z: 3.4 } }, { name: '后视镜', valueL: { x: 2.114, y: 2.124, z: -0.12 } }]
 const tabPosition = ref('1')
@@ -104,31 +216,40 @@ const closeDrawer = () => {
   xuanzhongType.value = 0
 
 }
-const changeType = (index) => {
-  xuanzhongType.value = index
+const activeTianqi = ref(0)
+const selecttianqi = (index) => {
+    activeTianqi.value = index
   switch (index) {
+    case 0:
+      light.intensity = 200;
+      ElMessage.success('大太阳')
+      break;
     case 1:
-      ElMessage.info('暂未开发')
-      xuanzhongType.value = 0
+      light.intensity = 50;
+      ElMessage.success('阴天')
       break;
     case 2:
-      showModelList.value = true
-      break;
-    case 3:
+      // light.intensity = 30;
       ElMessage.info('暂未开发')
-      xuanzhongType.value = 0
+      activeTianqi.value = 0
+      light.intensity = 200;
     default:
-      break;
+      break
   }
 }
-watch(() => shijiao.value, () => {
-  if (shijiao.value == '1') {
-    resetControl(controls)
-  } else if (shijiao.value == '2') {
-    changeQuanNeishi(controls)
-  } else { }
-  console.log('shijiao', shijiao.value);
-})
+const changeType = (index) => {
+  xuanzhongType.value = index
+  // showModelList.value = true
+  // ElMessage.info('暂未开发')
+}
+// watch(() => shijiao.value, () => {
+//   if (shijiao.value == '1') {
+//     resetControl(controls)
+//   } else if (shijiao.value == '2') {
+//     changeQuanNeishi(controls)
+//   } else { }
+//   console.log('shijiao', shijiao.value);
+// })
 // let canvasDom = ref(null);
 // 创建场景
 const scene = new THREE.Scene();
@@ -143,18 +264,18 @@ const activeColor = ref(0);
 const activeCameraPos = ref(0);
 const activeMaterial = ref(0);
 camera.position.set(2.93, 1.792, 1.586);
-const setCameraPosition = (position, index) => {
-  if (shijiao.value != '1') return ElMessage.warning('请切换视角');
-  const newPositions = new THREE.Vector3();
-  const originalPosition = camera.position.clone();
-  activeCameraPos.value = index;
-  gsap.to(originalPosition, {
-    x: position.x, y: position.y, z: position.z, onUpdate: () => {
-      camera.position.set(originalPosition.x, originalPosition.y, originalPosition.z);
-    }, duration: 1, onComplete: () => {
-    }
-  });
-};
+// const setCameraPosition = (position, index) => {
+//   if (shijiao.value != '1') return ElMessage.warning('请切换视角');
+//   const newPositions = new THREE.Vector3();
+//   const originalPosition = camera.position.clone();
+//   activeCameraPos.value = index;
+//   gsap.to(originalPosition, {
+//     x: position.x, y: position.y, z: position.z, onUpdate: () => {
+//       camera.position.set(originalPosition.x, originalPosition.y, originalPosition.z);
+//     }, duration: 1, onComplete: () => {
+//     }
+//   });
+// };
 // 创建渲染器
 const renderer = new THREE.WebGLRenderer({
   // 抗锯齿
@@ -204,6 +325,7 @@ const glassMaterial = new THREE.MeshPhysicalMaterial({
   transmission: 1,
   transparent: true,
 });
+
 const resetControl = (c) => {
   c.minPolarAngle = -Math.PI / 2;  // 限制相机只能够在水平面上旋转，不允许俯视
   c.maxPolarAngle = Math.PI / 3;  // 同样确保相机不会指向负方向d
@@ -237,13 +359,12 @@ const changeQuanNeishi = (c) => {
 
 };
 
-let colors = ["red", "blue", "green", "gray", "orange", "purple"];
+
 
 let selectColor = (index) => {
   bodyMaterial.color.set(colors[index]);
   frontMaterial.color.set(colors[index]);
   hoodMaterial.color.set(colors[index]);
-  wheelsMaterial.color.set(colors[index]);
   // glassMaterial.color.set(colors[index]);
   activeColor.value = index;
 };
@@ -267,16 +388,13 @@ window.addEventListener("resize", () => {
 document.body.appendChild(renderer.domElement);
 // 初始化渲染器，渲染背景
 renderer.setClearColor("#000");
-scene.background = new THREE.Color("#ccc");
+scene.background = new THREE.Color("#9BC2E4");
 scene.environment = new THREE.Color("#ccc");
 render();
 // 添加控制器
 controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
-resetControl(controls);
-controls.addEventListener("change", () => {
-  // console.log(camera.position);
-});
+
 // 添加gltf汽车模型
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
@@ -285,9 +403,9 @@ loader.setDRACOLoader(dracoLoader);
 loader.load("./model/bmw01.glb", (gltf) => {
   bmw = gltf.scene;
   bmw.traverse((child) => {
-    // if (child.isMesh) {
-    //   console.log(child.name);
-    // }
+    if (child.isMesh) {
+      child.castShadow = true;
+    }
     // 判断是否是轮毂
     if (child.isMesh && child.name.includes("轮毂")) {
       child.material = wheelsMaterial;
@@ -315,52 +433,18 @@ loader.load("./model/bmw01.glb", (gltf) => {
     }
   });
   scene.add(bmw);
-
-  // 添加灯光
-  const light1 = new THREE.DirectionalLight(0xffffff, 1);
-  light1.position.set(0, 0, 10);
-  scene.add(light1);
-  const light2 = new THREE.DirectionalLight(0xffffff, 1);
-  light2.position.set(0, 0, -10);
-  scene.add(light2);
-  const light3 = new THREE.DirectionalLight(0xffffff, 1);
-  light3.position.set(10, 0, 0);
-  scene.add(light3);
-  const light4 = new THREE.DirectionalLight(0xffffff, 1);
-  light4.position.set(-10, 0, 0);
-  scene.add(light4);
-  const light5 = new THREE.DirectionalLight(0xffffff, 1);
-  light5.position.set(0, 10, 0);
-  scene.add(light5);
-  const light6 = new THREE.DirectionalLight(0xffffff, 0.3);
-  light6.position.set(5, 10, 0);
-  scene.add(light6);
-  const light7 = new THREE.DirectionalLight(0xffffff, 0.3);
-  light7.position.set(0, 10, 5);
-  scene.add(light7);
-  const light8 = new THREE.DirectionalLight(0xffffff, 0.3);
-  light8.position.set(0, 10, -5);
-  scene.add(light8);
-  const light9 = new THREE.DirectionalLight(0xffffff, 0.3);
-  light9.position.set(-5, 10, 0);
-  scene.add(light9);
-});
-loader.load("./model/zhanting.glb", (gltf) => {
-  zhanting = gltf.scene;
-  scene.add(zhanting);
 });
 const zhanshiNeishi = () => {
-  if (shijiao.value == '3') {
+  if (shijiao.value == '2') {
     shijiao.value = '1'
     bmw.visible = true;
     zhanting.visible = true;
-    scene.background = null;
+    scene.background = new THREE.Color("#9BC2E4");
     return;
   }
-  shijiao.value = '3'
+  shijiao.value = '2'
   bmw.visible = false;
   zhanting.visible = false;
-
   // 加载天空盒纹理
   const loaderCube = new THREE.CubeTextureLoader();
   const skyboxTexture = loaderCube.load([
@@ -371,89 +455,70 @@ const zhanshiNeishi = () => {
     'CarPng/pz.jpg', // 前
     'CarPng/nz.jpg', // 后
   ]);
-
+  console.log(skyboxTexture);
   // 设置场景背景为天空盒纹理
   scene.background = skyboxTexture;
 }
-</script>
-<style scoped lang="less">
-.heardNav {
-  width: 100%;
-  height: 8%;
-  position: absolute;
-  top: 0;
-  background-color: rgba(236, 236, 241, 0.279);
-  box-shadow: 0px 0px 3px 5px;
-  z-index: 12;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+//增加光照
+renderer.shadowMap.enabled = true;   // 开启阴影
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;  // 使用软阴影
+// 设置光源 - 点光源
+const light = new THREE.PointLight(0xffffff, 200, 100, 2);
+light.position.set(2, 5, 2);  // 设置光源位置
+light.castShadow = true;   // 开启阴影
+light.shadow.mapSize.width = 2048;  // 提高阴影的分辨率
+light.shadow.mapSize.height = 2048;
+light.shadow.camera.near = 0.1;  // 阴影的近裁剪面
+light.shadow.camera.far = 25;    // 阴影的远裁剪面
+light.shadow.bias = -0.005;  // 阴影偏移，避免接缝现象
+scene.add(light);
 
-  .logo {
-    height: 100%;
-    // background-image: url("carLogo.png");
-    background-repeat: no-repeat;
-    z-index: 20;
-    background-size: 100% 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-left: 2rem;
+const chuangjianding = () => {
+  // 创建材质并应用
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0xD6DBDE,   // 颜色
+    side: THREE.DoubleSide,  // 双面渲染
+  });
+  // 创建底面
+  const bottomGeometry = new THREE.PlaneGeometry(10, 10);
+  const bottomMesh = new THREE.Mesh(bottomGeometry, material);
+  bottomMesh.rotation.x = -Math.PI / 2;  // 旋转 90 度，使其水平
+  bottomMesh.position.y = 0;  // 放置在地面上
+  bottomMesh.receiveShadow = true;  // 接收阴影
 
-    .nav {
-      width: auto;
-      height: 100%;
-      font-size: 2rem;
-      line-height: 5rem;
-      font-weight: 900;
-      margin-left: 1.5rem;
+  // 创建前面
+  const frontGeometry = new THREE.PlaneGeometry(10, 10);
+  const frontMesh = new THREE.Mesh(frontGeometry, material);
+  frontMesh.position.z = 5;  // 向前移动
+  frontMesh.rotation.y = Math.PI;  // 旋转 180 度，使其面向相机
 
-      text-shadow: -3px 0px 2px;
-      font-style: italic;
-      color: rgba(0, 0, 0, 0.637);
-      //扩大字体间距
-      text-decoration: underline;
-      // 字体间距
-      letter-spacing: 0.5rem;
-      // 设置字体下划线样式
-      text-decoration-style: solid;
+  // 创建后面
+  const backGeometry = new THREE.PlaneGeometry(10, 10);
+  const backMesh = new THREE.Mesh(backGeometry, material);
+  backMesh.position.z = -5;  // 向后移动
+  backMesh.rotation.y = Math.PI;  // 旋转 180 度
 
-      // 设置字体下划线颜色
-      text-decoration-color: rgb(19, 18, 18);
-      cursor: pointer;
-    }
+  // 创建左侧面
+  const leftGeometry = new THREE.PlaneGeometry(10, 10);
+  const leftMesh = new THREE.Mesh(leftGeometry, material);
+  leftMesh.position.x = -5;  // 向左移动
+  leftMesh.rotation.y = Math.PI / 2;  // 旋转 90 度
 
-    .iconfont {
-      font-size: 3rem;
-      line-height: 3rem;
-      color: rgba(24, 4, 197, 0.945);
-      cursor: pointer;
-    }
-  }
+  // 创建右侧面
+  const rightGeometry = new THREE.PlaneGeometry(10, 10);
+  const rightMesh = new THREE.Mesh(rightGeometry, material);
+  rightMesh.position.x = 5;  // 向右移动
+  rightMesh.rotation.y = -Math.PI / 2;  // 旋转 -90 度
 
-  .gongneng {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  zhanting = new THREE.Group();
+  zhanting.add(bottomMesh, leftMesh, frontMesh, backMesh, rightMesh);
 
-    width: auto;
-    height: 10vh;
-    line-height: 10vh;
-    margin-right: 2rem;
+  scene.add(zhanting);
 
-    .iconfont {
-      cursor: pointer;
-      height: 100%;
-      width: 2.5rem;
-      font-size: 2rem;
-
-    }
-
-  }
 }
-</style>
+//创建展示厅
+chuangjianding();
+</script>
 <style>
 .el-drawer {
   width: 20% !important;
@@ -463,14 +528,72 @@ const zhanshiNeishi = () => {
 <style scoped>
 .home-rightC {
   position: fixed;
-  top: 8%;
+  top: 0;
   right: 0;
-  width: 4rem;
-  height: calc(100vh - 8%);
+  width: 17rem;
+  height: 100vh;
+  background: #737373a8;
+  backdrop-filter: blur(10px);
+  /* box-shadow: 0 4px 6px rgba(148, 148, 148, 0.295); */
+  /* 增加阴影效果 */
+}
+.home-rightC2{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 24rem;
+  height: 100vh;
+  background: #737373a8;
+  backdrop-filter: blur(10px);
+
+}
+.home-rightb {
+  position: fixed;
+  top: 0;
+  right: 4rem;
+  width: 20rem;
+  height: 100vh;
+  background: #737373a8;
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  background-color: #00000047;
+  justify-content: center;
+  align-items: center;
+}
+.mainRightb{
+  height: calc(100% - 3rem);
+}
+
+.modellist {
+  width: 100%;
+  height: 8rem;
+}
+
+.qichemodel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 13rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-rightc1 {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background: #737373a8; */
+  /* backdrop-filter: blur(10px); */
+  /* 背景模糊效果 */
+  border-left: #696969a1 solid 1px;
 }
 
 .changeModel {
@@ -482,17 +605,15 @@ const zhanshiNeishi = () => {
   justify-content: center;
   align-items: center;
   font-size: 600;
-  background-color: #00000044;
-  border-bottom: #000000a2 solid 1px;
 }
 
 .changeModel:hover {
-  background-color: #af23238c;
+  background: linear-gradient(to right, rgba(169, 169, 169, 1), rgba(169, 169, 169, 0));
   color: #fff;
 }
 
 .activeType {
-  background-color: #af23238c;
+  background: linear-gradient(to right, rgba(169, 169, 169, 1), rgba(169, 169, 169, 0));
   color: #fff;
 }
 
@@ -519,19 +640,22 @@ const zhanshiNeishi = () => {
 
 .cameraPositons-item-name1 {
   position: fixed;
-  left: 1.6rem;
-  top: 13%;
+  right: 18rem;
+  top: 4%;
   height: 70%;
-  width: 4rem;
+  width: 3.5rem;
   text-align: center;
-  height: 4rem;
-  line-height: 4rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
   font-size: medium;
   color: #000000;
-  border: #00ffea8c solid .2em;
   border-radius: 50%;
-  background-color: rgb(255, 255, 255);
+  background-color: #737373a8;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin-bottom: 1.5rem;
 }
 
@@ -584,19 +708,50 @@ const zhanshiNeishi = () => {
   align-items: center;
 }
 
+.select-item {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .select-item-color {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid #ccc;
-  margin: 1.5rem 1rem;
-  display: inline-block;
+  /* border: 1px solid #ccc; */
+}
+
+.modelchelunlist {
+  width: 5rem;
+  height: 5rem;
+  /* border: 1px solid #ccc; */
+  margin: .5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   cursor: pointer;
-  border-radius: 1.5rem;
+  border-radius: 50%;
+
 }
 
 .active {
-  border: .2em solid #0051ff;
-  box-shadow: inset 0 0 1.5rem #0051ff;
+  /* width: 3rem;
+  height: 3rem; */
+  border: .17rem solid #ffffff !important;
+  /* 最外层的白色边框，2px */
+  /* box-shadow: 0 0 0 .2rem transparent;  3px 无色透明的边框 */
+}
+
+.active1 {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 50%;
+}
+
+.activeChelun {
+  background-color: #ffffff6b;
 }
 
 .select {
