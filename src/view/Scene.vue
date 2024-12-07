@@ -484,7 +484,7 @@ render();
 // 添加控制器
 controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
-// resetControl(controls)
+resetControl(controls)
 // 添加gltf汽车模型
 const loader = new GLTFLoader();
 const draco = new DRACOLoader();
