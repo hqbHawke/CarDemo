@@ -1,10 +1,10 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 // @ts-ignore
 import Scene from '../view/Scene.vue'
-import Login from '../view/login/login.vue'
+// import Login from '../view/login/login.vue'
 
 const routes:any = [
-  { path: '/', component: Login },
+  { path: '/', component: Scene },
   { path: '/Scene', component: Scene }
 ]
 
