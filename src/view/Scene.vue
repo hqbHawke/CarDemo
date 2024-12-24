@@ -304,7 +304,7 @@ const camera = new THREE.PerspectiveCamera(
 const activeColor = ref(0);
 const activeCameraPos = ref(0);
 const activeMaterial = ref(0);
-camera.position.set(2.93, 1.792, 1.586);
+camera.position.set(0, 1, -3.5);
 // const setCameraPosition = (position, index) => {
 //   if (shijiao.value != '1') return ElMessage.warning('请切换视角');
 //   const newPositions = new THREE.Vector3();
@@ -396,9 +396,9 @@ window.addEventListener('click', (e) => {
 )
 const resetControl = (c) => {
   c.minPolarAngle = -Math.PI / 2;  // 限制相机只能够在水平面上旋转，不允许俯视
-  c.maxPolarAngle = Math.PI / 3;  // 同样确保相机不会指向负方向d
-  c.minDistance = 3;  // 限制相机最小距离
-  c.maxDistance = 6;  // 限制相机最大距离
+  c.maxPolarAngle = Math.PI / 2.5;  // 同样确保相机不会指向负方向d
+  c.minDistance = 3.5;  // 限制相机最小距离
+  c.maxDistance = 4.6;  // 限制相机最大距离
   c.enableDamping = true;  // 开启相机惯性
   c.dampingFactor = 0.1;  // 设置相机惯性
   c.enablePan = false;  // 禁止平移
