@@ -715,8 +715,21 @@ const chuangjianding = () => {
   // scene.add(bottomMesh);
 
 }
+const tinajiaSky = () => {
+  const loaderCube = new THREE.CubeTextureLoader();
+  const skyboxTexture = loaderCube.load([
+    'CarPng/px.jpg', // 右
+    'CarPng/nx.jpg', // 左
+    'CarPng/py.jpg', // 上
+    'CarPng/ny.jpg', // 下
+    'CarPng/pz.jpg', // 前
+    'CarPng/nz.jpg', // 后
+  ]);
+  scene.environment = skyboxTexture;
+}
 //创建展示厅
 chuangjianding();
+tianjiaSky();
 </script>
 <style>
 .el-drawer {
