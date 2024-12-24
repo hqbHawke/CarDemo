@@ -715,7 +715,7 @@ const chuangjianding = () => {
   // scene.add(bottomMesh);
 
 }
-const tinajiaSky = () => {
+const tianjiaSky = () => {
   const loaderCube = new THREE.CubeTextureLoader();
   const skyboxTexture = loaderCube.load([
     'CarPng/px.jpg', // 右
